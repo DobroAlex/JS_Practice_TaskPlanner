@@ -12,11 +12,17 @@ app.use(bodyParser())
 const logger = require('koa-morgan')
 app.use(logger('dev'))
 
+const koaRespond = require('koa-respond')
+app.use(koaRespond())
+
 const errorHandler = require('./error-handler')
 app.use(errorHandler.errorHandle)
 
 const responseTimeSetter = require('../middlewares/common/x-response-time')
 app.use(responseTimeSetter.setResponseTimeHeader)
+
+const normalRespond = require('../middlewares/common/normalRespond')
+app.use(normalRespond.normalRespond) // this is ought to be LAST middleware in stack
 
 const server = app.listen(8081 || process.env.PORT)
 console.log(`Server is listening at ${server.address().port}`)
