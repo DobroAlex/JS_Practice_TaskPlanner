@@ -42,7 +42,7 @@ async function loginUser (ctx, next) {
     await foundUser.save()
 
     ctx.status = 200
-    ctx.message = 'OK'
+    ctx.message = { token: foundUser.token }
   } else {
     throw utils.errorGenerator(404, 'No such email or password')
   }
