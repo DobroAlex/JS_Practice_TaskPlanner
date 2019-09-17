@@ -23,5 +23,6 @@ const REGISTRATION_SCHEMA = {
   },
   required: ['email', 'password']
 }
+const AUTH_SCHEMA = REGISTRATION_SCHEMA
 
-module.exports = { validateSchema, REGISTRATION_SCHEMA }
+module.exports = { validateSchema, REGISTRATION_SCHEMA, AUTH_SCHEMA }
