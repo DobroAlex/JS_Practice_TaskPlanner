@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@koa/cors": "^3.0.0",
+    "ajv": "^6.10.2",
     "bcrypt": "^3.0.6",
     "dotenv": "^8.1.0",
     "js-sha256": "^0.9.0",
