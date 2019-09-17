@@ -3,10 +3,16 @@ const _ = require('lodash')
 const crypto = require('../../libs/crypto')
 const utils = require('../../libs/utils')
 const jwt = require('../../libs/jwt-utils')
+const ajv = require('../../libs/ajv')
 
 const userModel = require('../../models/user')
 
 async function registerUser (ctx, next) {
+  const ajvResult = await ajv.validateSchema(ajv.REGISTRATION_SCHEMA, ctx.request.body)
+  if (!ajvResult.success) {
+    throw utils.errorGenerator(422, ajvResult.message)
+  }
+
   const newUser = ctx.request.body
   newUser.password = await crypto.encryptPassword(newUser.password) // ready to be stored in DB after encryption
   newUser.tasks = [] // by default they are empty
