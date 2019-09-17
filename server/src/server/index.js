@@ -21,7 +21,11 @@ app.use(errorHandler.errorHandle)
 const responseTimeSetter = require('../middlewares/common/x-response-time')
 app.use(responseTimeSetter.setResponseTimeHeader)
 
-const normalRespond = require('../middlewares/common/normalRespond')
+const publicRoutes = require('../routes/public')
+app.use(publicRoutes.routes())
+app.use(publicRoutes.allowedMethods())
+
+const normalRespond = require('../middlewares/common/normal-respond')
 app.use(normalRespond.normalRespond) // this is ought to be LAST middleware in stack
 
 const server = app.listen(8081 || process.env.PORT)
