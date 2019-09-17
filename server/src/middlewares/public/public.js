@@ -1,5 +1,3 @@
-const _ = require('lodash')
-
 const crypto = require('../../libs/crypto')
 const utils = require('../../libs/utils')
 const jwt = require('../../libs/jwt-utils')
