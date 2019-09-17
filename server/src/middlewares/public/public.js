@@ -9,8 +9,7 @@ const validator = require('../common/validate-ajv-schema')
 const userModel = require('../../models/user')
 
 async function registerUser (ctx, next) {
-  ctx.validationTarget = ctx.request.body
-  ctx.validationSchema = ajv.REGISTRATION_SCHEMA
+  validator.assignSchemaAndDtaToCtx(ctx, ajv.REGISTRATION_SCHEMA, ctx.request.body)
 
   await validator.validateSchema(ctx, next)
 
@@ -27,6 +26,10 @@ async function registerUser (ctx, next) {
 }
 
 async function loginUser (ctx, next) {
+  validator.assignSchemaAndDtaToCtx(ctx, ajv.AUTH_SCHEMA, ctx.request.body)
+
+  await validator.validateSchema(ctx, next)
+
   const foundUser = await userModel.User.findOne({ email: ctx.request.body.email })
 
   if (!foundUser) {
