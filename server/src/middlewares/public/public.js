@@ -7,11 +7,12 @@ const validator = require('../common/validate-ajv-schema')
 const userModel = require('../../models/user')
 
 async function registerUser (ctx, next) {
-  validator.assignSchemaAndDtaToCtx(ctx, ajv.REGISTRATION_SCHEMA, ctx.request.body)
+  validator.assignSchemaAndDataToCtx(ctx, ajv.REGISTRATION_SCHEMA, ctx.request.body)
 
   await validator.validateSchema(ctx, next)
 
   const newUser = ctx.request.body
+  newUser.role = 'user' // all users are not admins by default
   newUser.password = await crypto.encryptPassword(newUser.password) // ready to be stored in DB after encryption
   newUser.tasks = [] // by default they are empty
 
@@ -24,7 +25,7 @@ async function registerUser (ctx, next) {
 }
 
 async function loginUser (ctx, next) {
-  validator.assignSchemaAndDtaToCtx(ctx, ajv.AUTH_SCHEMA, ctx.request.body)
+  validator.assignSchemaAndDataToCtx(ctx, ajv.AUTH_SCHEMA, ctx.request.body)
 
   await validator.validateSchema(ctx, next)
 
