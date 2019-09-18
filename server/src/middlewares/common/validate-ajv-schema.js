@@ -1,7 +1,7 @@
 const ajv = require('../../libs/ajv')
 const utils = require('../../libs/utils')
 
-function assignSchemaAndDtaToCtx (ctx, schema, data) {
+function assignSchemaAndDataToCtx (ctx, schema, data) {
   ctx.validationSchema = schema
   ctx.validationTarget = data
 }
@@ -16,4 +16,4 @@ async function validateSchema (ctx, next) {
   }
 }
 
-module.exports = { assignSchemaAndDtaToCtx, validateSchema }
+module.exports = { assignSchemaAndDataToCtx, validateSchema }
