@@ -14,7 +14,8 @@ function checkGivenToken (token) {
 
 async function checkToken (ctx, next) {
   try {
-    return checkGivenToken(getTokenFromHeader(ctx))
+    ctx.decodedToken = checkGivenToken(getTokenFromHeader(ctx))
+    await next()
   } catch (e) {
     throw utils.errorGenerator(422, `${e}`)
   }
