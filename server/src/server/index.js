@@ -25,6 +25,10 @@ const publicRoutes = require('../routes/public')
 app.use(publicRoutes.routes())
 app.use(publicRoutes.allowedMethods())
 
+const meRoutes = require('../routes/me')
+app.use(meRoutes.routes())
+app.use(meRoutes.allowedMethods())
+
 const normalRespond = require('../middlewares/common/normal-respond')
 app.use(normalRespond.normalRespond) // this is ought to be LAST middleware in stack
 
