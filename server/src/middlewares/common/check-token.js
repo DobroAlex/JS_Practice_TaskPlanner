@@ -5,7 +5,7 @@ function getTokenFromHeader (ctx) {
   if (!ctx.headers.authorization) {
     throw utils.errorGenerator(400, 'No auth header in form of \'Bearer %token\' was found')
   }
-  return ctx.headers.authorization.split(' ')[1].trim
+  return ctx.headers.authorization.split(' ')[1].trim()
 }
 
 function checkGivenToken (token) {
