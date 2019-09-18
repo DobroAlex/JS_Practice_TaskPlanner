@@ -24,5 +24,19 @@ const REGISTRATION_SCHEMA = {
   required: ['email', 'password']
 }
 const AUTH_SCHEMA = REGISTRATION_SCHEMA
+const JWT_TOKEN_SCHEMA = {
+  id: 'JWT_TOKEN_SCHEMA',
+  $async: true,
+  properties: {
+    email: {
+      type: 'string'
+    },
+    role: {
+      type: 'string',
+      pattern: 'admin|user'
+    }
+  },
+  required: ['email', 'role']
+}
 
-module.exports = { validateSchema, REGISTRATION_SCHEMA, AUTH_SCHEMA }
+module.exports = { validateSchema, REGISTRATION_SCHEMA, AUTH_SCHEMA, JWT_TOKEN_SCHEMA }
