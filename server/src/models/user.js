@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const UserSchema = new Schema({
   email: String,
   password: String, // should be stored as bcrypted string
+  role: String,
   tasks: [{
     date: Date,
     remindBefore: Date, // notification should be sent at date - remindBefore
