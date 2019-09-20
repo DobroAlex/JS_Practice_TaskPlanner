@@ -18,8 +18,7 @@ async function registerUser (ctx, next) {
 
   await new userModel.User(newUser).save() // saving and storing
 
-  ctx.status = 200
-  ctx.message = `New user ${newUser.email} saved OK`
+  utils.ctxResponseSetter(ctx, 200, `New user ${newUser.email} saved OK`)
 
   await next()
 }
@@ -40,8 +39,7 @@ async function loginUser (ctx, next) {
 
     await foundUser.save()
 
-    ctx.status = 200
-    ctx.message = { token: foundUser.token }
+    utils.ctxResponseSetter(ctx, 200, { token: foundUser.token })
   } else {
     throw utils.errorGenerator(404, 'No such email or password')
   }

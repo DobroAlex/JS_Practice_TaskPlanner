@@ -11,8 +11,7 @@ async function getMe (ctx, next) {
 
   const foundUser = await userModel.User.findOne({ email: ctx.decodedToken.email }, 'email tasks')
 
-  ctx.status = 200
-  ctx.message = foundUser
+  utils.ctxResponseSetter(ctx, 200, foundUser)
 
   await next()
 }
