@@ -4,4 +4,9 @@ async function errorGenerator (status, message) {
   return e
 }
 
-module.exports = { errorGenerator }
+function ctxResponseSetter (ctx, status, message) {
+  ctx.status = status
+  ctx.message = message
+}
+
+module.exports = { errorGenerator, ctxResponseSetter }
