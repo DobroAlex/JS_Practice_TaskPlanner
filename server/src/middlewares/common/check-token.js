@@ -13,11 +13,7 @@ function checkGivenToken (token) {
 }
 
 async function checkToken (ctx, next) {
-  try {
-    ctx.decodedToken = checkGivenToken(getTokenFromHeader(ctx))
-    await next()
-  } catch (e) {
-    throw utils.errorGenerator(422, `${e}`)
-  }
+  ctx.decodedToken = checkGivenToken(getTokenFromHeader(ctx))
+  await next()
 }
 module.exports = { checkToken }
