@@ -2,10 +2,12 @@ const Ajv = require('ajv')
 const ajvInstance = new Ajv({ allErrors: true })
 
 async function validateSchema (schema, data, ajv = ajvInstance) {
-  if (await ajv.validate(schema, data)) {
+  try {
+    await ajv.validate(schema, data)
     return { success: true, message: '' }
+  } catch (e) {
+    return { success: false, message: ajv.errorsText() }
   }
-  return { success: false, message: `${ajv.errorsText()}` }
 }
 
 const REGISTRATION_SCHEMA = {
