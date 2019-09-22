@@ -31,7 +31,10 @@ async function loginUser (ctx, next) {
   const foundUser = await userModel.User.findOne({ email: ctx.request.body.email })
 
   if (!foundUser) {
-    throw utils.errorGenerator(404, 'No such email or password')
+    //throw utils.errorGenerator(404, 'No such email or password')
+    conse E = new Error('No such email or passsword')
+    E.status = 404
+    throw E
   }
 
   if (await crypto.comparePassword(ctx.request.body.password, foundUser.password)) {
@@ -41,7 +44,10 @@ async function loginUser (ctx, next) {
 
     utils.ctxResponseSetter(ctx, 200, { token: foundUser.token })
   } else {
-    throw utils.errorGenerator(404, 'No such email or password')
+    // throw utils.errorGenerator(404, 'No such email or password')
+    const E = new Error('!!!!')
+    E.status = 404
+    throw E
   }
   await next()
 }
